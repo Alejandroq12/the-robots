@@ -4,11 +4,11 @@ import SearchBox from "./SearchBox";
 
 const App = () => {
   return (
-    <>
+    <div className="tc">
       <h1>The Robots</h1>
       <SearchBox />
       <CardList robots={robots} />
-    </>
+    </div>
   );
 }
 
