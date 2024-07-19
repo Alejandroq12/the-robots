@@ -1,6 +1,6 @@
-import CardList from "./CardList";
-import { robots } from "./robots";
-import SearchBox from "./SearchBox";
+import CardList from './CardList';
+import { robots } from './robots';
+import SearchBox from './SearchBox';
 
 const App = () => {
   return (
@@ -10,6 +10,6 @@ const App = () => {
       <CardList robots={robots} />
     </div>
   );
-}
+};
 
 export default App;
