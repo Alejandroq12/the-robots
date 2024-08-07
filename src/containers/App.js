@@ -15,6 +15,7 @@ function App() {
 
   const [robots, setRobots] = useState([]);
   const [searchfield, setSearchfield] = useState('');
+  const [count, setCount] = useState(0);
 
   const onSearchChange = (event) => {
     setSearchfield(event.target.value);
@@ -24,7 +25,8 @@ function App() {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(users => setRobots(users));
-  }, []);
+      console.log(count);
+  }, [count]); // only run if count changes
 
     // const { robots, searchfield } = this.state;
     const filteredRobots = robots.filter((robot) => {
@@ -36,6 +38,7 @@ function App() {
         (
         <div className="tc">
           <h1 className="title">The Robots</h1>
+          <button onClick={() => setCount(count + 1)}>Click me! {count}</button>
           <SearchBox searchChange={onSearchChange} />
           <Scroll>
             <ErrorBoundry>
