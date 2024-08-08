@@ -4,23 +4,27 @@ import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import './App.css';
-import { setSearchField } from '../actions';
+import { setSearchField, requestRobots } from '../actions';
 import ErrorBoundry from '../components/ErrorBoundry';
 
 const mapStateToProps = (state) => {
-  // console.log(state)
+  console.log(state)
   return {
     searchField: state.searchRobots.searchField,
+    robots: state.requestRobots.robots,
+    isPending: state.requestRobots.isPending,
+    error: state.requestRobots.error
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+    onRequestRobots: () => dispatch(requestRobots())
   };
 };
 
-function App({ searchField, onSearchChange}) {
+function App({ searchField, onSearchChange, robots, onRequestRobots, isPending}) {
   // constructor() {
   //   super();
   //   this.state = {
@@ -29,28 +33,23 @@ function App({ searchField, onSearchChange}) {
   //   };
   // }
 
-  const [robots, setRobots] = useState([]);
+  // const [robots, setRobots] = useState([]);
   // const [searchfield, setSearchfield] = useState('');
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((response) => response.json())
-      .then((users) => setRobots(users));
-    console.log(count);
-  }, [count]); // only run if count changes
+    onRequestRobots();
+  }, []);
 
   // const { robots, searchfield } = this.state;
   const filteredRobots = robots.filter((robot) => {
     return robot.name.toLowerCase().includes(searchField.toLowerCase());
   });
 
-  return !robots.length ? (
+  return isPending ? (
     <h1>Loading...</h1>
   ) : (
     <div className="tc">
       <h1 className="title">The Robots</h1>
-      <button onClick={() => setCount(count + 1)}>Click me! {count}</button>
       <SearchBox searchChange={onSearchChange} />
       <Scroll>
         <ErrorBoundry>
