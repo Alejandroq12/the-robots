@@ -8,8 +8,9 @@ import { setSearchField } from '../actions';
 import ErrorBoundry from '../components/ErrorBoundry';
 
 const mapStateToProps = (state) => {
+  // console.log(state)
   return {
-    searchField: state.searchField,
+    searchField: state.searchRobots.searchField,
   };
 };
 
