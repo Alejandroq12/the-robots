@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
+import Header from '../components/Header';
 import './App.css';
 import { setSearchField, requestRobots } from '../actions';
 import ErrorBoundry from '../components/ErrorBoundry';
@@ -49,7 +50,7 @@ function App({ searchField, onSearchChange, robots, onRequestRobots, isPending})
     <h1>Loading...</h1>
   ) : (
     <div className="tc">
-      <h1 className="title">The Robots</h1>
+      <Header />
       <SearchBox searchChange={onSearchChange} />
       <Scroll>
         <ErrorBoundry>
